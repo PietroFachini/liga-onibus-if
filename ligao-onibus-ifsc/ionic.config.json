@@ -1,0 +1,7 @@
+{
+  "name": "ligao-onibus-ifsc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
