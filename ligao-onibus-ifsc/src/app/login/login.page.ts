@@ -2,7 +2,21 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+
+import {
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonInput,
+  IonButton,
+  IonItem,
+  IonLabel,
+  IonCard,
+  IonCardContent,
+  IonIcon
+} from '@ionic/angular';
+
 import { AuthService } from '../services/authService';
 
 @Component({
@@ -10,7 +24,21 @@ import { AuthService } from '../services/authService';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonInput,
+    IonButton,
+    IonItem,
+    IonLabel,
+    IonCard,
+    IonCardContent
+  ],
 })
 export class LoginPage {
 
@@ -39,6 +67,7 @@ export class LoginPage {
       this.senha = '';
     }
   }
+
   async loginGoogle() {
     this.mensagemErro = '';
 
