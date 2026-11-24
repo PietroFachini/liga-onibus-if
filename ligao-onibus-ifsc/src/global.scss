@@ -35,3 +35,15 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+ion-toolbar {
+  --background: #0871fa;
+  --color: #fff;
+}
+
+.page-title-band {
+  background: #0871fa;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+}

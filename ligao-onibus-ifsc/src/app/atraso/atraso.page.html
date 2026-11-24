@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Reportar atraso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="atraso-wrap">
+    <div class="atraso-intro">
+      <div class="atraso-logo">🚌</div>
+      <h1>Reportar atraso</h1>
+      <p>Toque em uma rota para informar o tempo de atraso em minutos.</p>
+    </div>
+
+    <p *ngIf="carregando" role="status">Carregando rotas...</p>
+
+    <p *ngIf="!carregando && mensagemErro" class="mensagem erro" role="alert">
+      {{ mensagemErro }}
+    </p>
+
+    <p *ngIf="!carregando && mensagemSucesso" class="mensagem sucesso" role="status">
+      {{ mensagemSucesso }}
+    </p>
+
+    <p *ngIf="!carregando && !mensagemErro && rotas.length === 0">
+      Nenhuma rota disponível no momento.
+    </p>
+
+    <ion-card
+      *ngFor="let rota of rotas"
+      class="rota-card"
+      (click)="selecionarRota(rota)"
+    >
+      <ion-card-header>
+        <ion-card-title>{{ rota.rota }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Horário:</strong> {{ rota.horario }}</p>
+        <p><strong>Status:</strong> {{ descreverStatus(rota) }}</p>
+
+        <div
+          *ngIf="rotaSelecionadaId === rota.id"
+          class="form-atraso"
+          (click)="$event.stopPropagation()"
+        >
+          <ion-item>
+            <ion-label position="stacked">Tempo de atraso (minutos)</ion-label>
+            <ion-input
+              [(ngModel)]="tempoAtraso"
+              type="number"
+              min="1"
+              step="1"
+              placeholder="Ex.: 10"
+              [disabled]="salvando"
+            ></ion-input>
+          </ion-item>
+
+          <ion-button
+            expand="block"
+            [disabled]="salvando"
+            (click)="registrarAtraso(rota)"
+          >
+            {{ salvando ? 'Registrando...' : 'Registrar atraso' }}
+          </ion-button>
+          <ion-button
+            expand="block"
+            fill="clear"
+            [disabled]="salvando"
+            (click)="selecionarRota(rota)"
+          >
+            Cancelar
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,20 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Liga onibus IFSC
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div class="login-wrap">
+    <div class="login-marca">
+      <div class="login-logo">🚌</div>
+      <h1>Liga onibus</h1>
+      <p>Não perca seu onibus</p>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <p *ngIf="carregando" role="status">Carregando rotas...</p>
+
+    <p *ngIf="!carregando && mensagemErro" class="msg-erro" role="alert">
+      {{ mensagemErro }}
+    </p>
+
+    <p *ngIf="!carregando && !mensagemErro && rotas.length === 0">
+      Nenhuma rota disponível no momento.
+    </p>
+
+    <ion-card *ngFor="let rota of rotas">
+      <ion-card-header>
+        <ion-card-title>{{ rota.rota }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Horário:</strong> {{ rota.horario }}</p>
+        <p>
+          <strong>Status:</strong>
+          {{ descreverStatus(rota) }}
+        </p>
+      </ion-card-content>
+    </ion-card>
+      <ion-button (click)="irParaAtraso()" expand="block" fill="clear" shape="round">
+        Reportar atraso
+      </ion-button>
   </div>
 </ion-content>
